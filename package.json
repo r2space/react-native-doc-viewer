@@ -1,6 +1,6 @@
 {
   "name": "react-native-doc-viewer2",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "React Native Native Module Bridge Quicklock Document Viewer for IOS -Supports pdf, png, jpg, xls, ppt, doc, docx, pptx, xlx",
   "main": "index.js",
   "scripts": {
