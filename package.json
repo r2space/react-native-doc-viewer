@@ -1,7 +1,6 @@
-
 {
-  "name": "react-native-doc-viewer",
-  "version": "1.4.1",
+  "name": "react-native-doc-viewer2",
+  "version": "2.0.0",
   "description": "React Native Native Module Bridge Quicklock Document Viewer for IOS -Supports pdf, png, jpg, xls, ppt, doc, docx, pptx, xlx",
   "main": "index.js",
   "scripts": {
@@ -19,15 +18,13 @@
   "author": "Philipp Hecht",
   "license": "MIT",
   "peerDependencies": {
-    "react-native": "^0.39.2",
-    "react-native-windows": "0.41.0-rc.1"
-
+    "react-native": "^0.42.0",
+    "react-native-windows": "^0.42.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/philipphecht/react-native-doc-viewer.git"
+    "url": "git+https://github.com/r2space/react-native-doc-viewer.git"
   },
-    "readme": "https://github.com/philipphecht/react-native-doc-viewer/blob/master/README.md",
-  "homepage": "https://github.com/philipphecht/react-native-doc-viewer/blob/master/README.md",
-  "main": "index.js"
+  "readme": "https://github.com/r2space/react-native-doc-viewer/blob/master/README.md",
+  "homepage": "https://github.com/r2space/react-native-doc-viewer/blob/master/README.md"
 }

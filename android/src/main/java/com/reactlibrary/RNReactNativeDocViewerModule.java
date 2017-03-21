@@ -65,7 +65,8 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
             final String url = arg_object.getString("url");
             final String fileName =arg_object.getString("fileName");
             // Begin the Download Task
-            new FileDownloaderAsyncTask(callback, url, fileName).execute();
+            final String mimeType = arg_object.getString("mimeType");
+            new FileDownloaderAsyncTask(callback, url, fileName, mimeType).execute();
         }else{
             callback.invoke(false);
         }
@@ -161,18 +162,20 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
         return mimeType;
     }
     
-  private class FileDownloaderAsyncTask extends AsyncTask<Void, Void, File> {
+    private class FileDownloaderAsyncTask extends AsyncTask<Void, Void, File> {
 
         private final Callback callback;
         private final String url;
         private final String fileName;
-       
+        private final String mimeType;
+
         public FileDownloaderAsyncTask(Callback callback,
-                String url, String fileName) {
+                String url, String fileName, String mimeType) {
             super();
             this.callback = callback;
             this.url = url;
             this.fileName = fileName;
+            this.mimeType = mimeType;
         }
 
         @Override
@@ -196,13 +199,16 @@ public class RNReactNativeDocViewerModule extends ReactContextBaseJavaModule {
             Context context = getReactApplicationContext().getBaseContext();
 
             // mime type of file data
-            String mimeType = getMimeType(url);
-            if (mimeType == null) {
+            String mime = this.mimeType;
+            if (mime == null) {
+                mime = getMimeType(url);
+            }
+            if (mime == null) {
                 return;
             }
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.fromFile(result), mimeType);
+                intent.setDataAndType(Uri.fromFile(result), mime);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
           
