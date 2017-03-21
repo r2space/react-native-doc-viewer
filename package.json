@@ -18,8 +18,7 @@
   "author": "Philipp Hecht",
   "license": "MIT",
   "peerDependencies": {
-    "react-native": "^0.42.0",
-    "react-native-windows": "^0.42.0"
+    "react-native": "^0.42.0"
   },
   "repository": {
     "type": "git",
