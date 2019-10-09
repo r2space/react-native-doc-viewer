@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import "QLCustomPreviewItem.h"
+#import "QLPreviewControllerCustom.h"
 
 @implementation RNDocViewer
 CGFloat prog;
@@ -58,7 +59,7 @@ RCT_EXPORT_METHOD(openDoc:(NSArray *)array callback:(RCTResponseSenderBlock)call
         NSString* fileNameOptional = dict[@"fileName"];
         NSString* fileType = dict[@"fileType"];
         NSURL* url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        NSData* dat = [NSData dataWithContentsOfURL:url];
+        
         RCTLogInfo(@"Url %@", url);
         RCTLogInfo(@"FileNameOptional %@", fileNameOptional);
         NSArray* parts = [urlStr componentsSeparatedByString:@"/"];
@@ -97,6 +98,7 @@ RCT_EXPORT_METHOD(openDoc:(NSArray *)array callback:(RCTResponseSenderBlock)call
 
         //From the www
         if ([urlStr containsString:@"http"] || [urlStr containsString:@"https"]) {
+            NSData* dat = [NSData dataWithContentsOfURL:url];
             if (dat == nil) {
                 if (callback) {
                     callback(@[[NSNull null], @"Doc Url not found"]);
@@ -115,9 +117,12 @@ RCT_EXPORT_METHOD(openDoc:(NSArray *)array callback:(RCTResponseSenderBlock)call
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            QLPreviewController* cntr = [[QLPreviewController alloc] init];
+            QLPreviewControllerCustom* cntr = [[QLPreviewControllerCustom alloc] init];
             cntr.delegate = weakSelf;
             cntr.dataSource = weakSelf;
+            cntr.fileUrl = weakSelf.fileUrl;
+            cntr.fileName = fileNameOptional ? fileNameOptional : fileName;
+            
             if (callback) {
                 callback(@[[NSNull null], array]);
             }

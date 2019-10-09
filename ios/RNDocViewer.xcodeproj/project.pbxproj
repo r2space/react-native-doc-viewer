@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AAFA387B2088EDB000994D8E /* RNDocViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFA38792088EDB000994D8E /* RNDocViewer.m */; };
+		AF8675BE234EAB7900269659 /* QLPreviewControllerCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8675BD234EAB7900269659 /* QLPreviewControllerCustom.m */; };
 		FAC8A856206AA17500EEE084 /* QLCustomPreviewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC8A855206AA17400EEE084 /* QLCustomPreviewItem.m */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,8 @@
 		134814201AA4EA6300B7C361 /* libRNDocViewer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNDocViewer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAFA38792088EDB000994D8E /* RNDocViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNDocViewer.m; sourceTree = "<group>"; };
 		AAFA387A2088EDB000994D8E /* RNDocViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDocViewer.h; sourceTree = "<group>"; };
+		AF8675BC234EAB7900269659 /* QLPreviewControllerCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLPreviewControllerCustom.h; sourceTree = "<group>"; };
+		AF8675BD234EAB7900269659 /* QLPreviewControllerCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLPreviewControllerCustom.m; sourceTree = "<group>"; };
 		FAC8A854206AA17400EEE084 /* QLCustomPreviewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLCustomPreviewItem.h; sourceTree = "<group>"; };
 		FAC8A855206AA17400EEE084 /* QLCustomPreviewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLCustomPreviewItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +56,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				AF8675BC234EAB7900269659 /* QLPreviewControllerCustom.h */,
+				AF8675BD234EAB7900269659 /* QLPreviewControllerCustom.m */,
 				AAFA387A2088EDB000994D8E /* RNDocViewer.h */,
 				AAFA38792088EDB000994D8E /* RNDocViewer.m */,
 				FAC8A854206AA17400EEE084 /* QLCustomPreviewItem.h */,
@@ -100,6 +105,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -119,6 +125,7 @@
 			files = (
 				AAFA387B2088EDB000994D8E /* RNDocViewer.m in Sources */,
 				FAC8A856206AA17500EEE084 /* QLCustomPreviewItem.m in Sources */,
+				AF8675BE234EAB7900269659 /* QLPreviewControllerCustom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
