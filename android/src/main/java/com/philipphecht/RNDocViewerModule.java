@@ -4,9 +4,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.WritableNativeArray;
-import com.facebook.react.bridge.WritableNativeMap;
-import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableArray;
 
@@ -30,7 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -39,9 +36,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.webkit.CookieManager;
 import android.webkit.MimeTypeMap;
-import android.widget.Toast;
-import android.util.Log;
-import android.webkit.WebView;
 
 public class RNDocViewerModule extends ReactContextBaseJavaModule {
   public static final int ERROR_NO_HANDLER_FOR_DATA_TYPE = 53;
