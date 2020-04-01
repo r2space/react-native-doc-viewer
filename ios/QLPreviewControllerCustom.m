@@ -1,7 +1,5 @@
 #import "QLPreviewControllerCustom.h"
 
-
-
 @implementation QLPreviewControllerCustom
 
 - (void)viewDidLoad {
@@ -9,6 +7,54 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                            target:self
                                                                                            action:@selector(shareAction)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
+    [self removeDefaultShareButton:navigationBar];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
+    [self removeDefaultShareButton:navigationBar];
+}
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
+    [self removeDefaultShareButton:navigationBar];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
+    [self removeDefaultShareButton:navigationBar];
+}
+
+- (void)removeDefaultShareButton:(UINavigationBar*)nvBar {
+    if (nvBar) {
+        UINavigationItem *item = nvBar.items.firstObject;
+        if (item.rightBarButtonItems.count > 1) {
+            UIBarButtonItem* button = item.rightBarButtonItems[1];
+            NSArray * buttons = @[button];
+            [item setRightBarButtonItems:buttons];
+        }
+    }
+}
+
+- (UINavigationBar*)getNavigationBarFromView:(UIView *)view {
+    for (UIView *v in view.subviews) {
+        if ([v isKindOfClass:[UINavigationBar class]]) {
+            return (UINavigationBar *)v;
+        } else {
+            UINavigationBar *navigationBar = [self getNavigationBarFromView:v];
+            if (navigationBar) {
+                return navigationBar;
+            }
+        }
+    }
+    return nil;
 }
 
 - (NSURL*) createTmpFile
@@ -44,10 +90,19 @@
     [[UIActivityViewController alloc] initWithActivityItems:dataToShare
                                       applicationActivities:nil];
     
-    [self presentViewController:activityViewController
-                       animated:YES
-                     completion:^{}];
-    
+    //for iPhone
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+
+        [self presentViewController:activityViewController animated:YES completion:^{}];
+
+    }
+    //for iPad
+    else {
+        // Change Rect to position Popover
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+        [popup presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+
+    }
 }
 
 - (BOOL)canShowToolbar {
