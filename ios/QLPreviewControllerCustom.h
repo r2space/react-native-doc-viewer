@@ -4,4 +4,5 @@
 @interface QLPreviewControllerCustom : QLPreviewController
 @property (assign,nonatomic) NSURL *fileUrl;
 @property (assign,nonatomic) NSString *fileName;
+@property (assign,nonatomic) UIInterfaceOrientation orientations;
 @end

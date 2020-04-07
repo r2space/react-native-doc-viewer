@@ -4,6 +4,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.orientations = [[UIApplication sharedApplication] statusBarOrientation];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                            target:self
                                                                                            action:@selector(shareAction)];
@@ -12,14 +13,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
+    [navigationBar setHidden:YES];
     [self removeDefaultShareButton:navigationBar];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
     UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
+    [navigationBar setHidden:NO];
     [self removeDefaultShareButton:navigationBar];
 }
+
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
@@ -30,6 +35,27 @@
     [super viewDidLayoutSubviews];
     UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
     [self removeDefaultShareButton:navigationBar];
+}
+
+- (void)orientationChanged:(NSNotification*)notification {
+    [self adjustNavigationBarForOrientation:(UIInterfaceOrientation)[[UIApplication sharedApplication] statusBarOrientation]];
+}
+
+- (void)adjustNavigationBarForOrientation:(UIInterfaceOrientation) orientation {
+    UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
+    if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
+        if (orientation != self.orientations) {
+            [navigationBar setHidden:YES];
+            self.orientations = orientation;
+        }
+    } else if (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight) {
+        if (orientation != self.orientations) {
+            [navigationBar setHidden:YES];
+            self.orientations = orientation;
+        }
+    } else if (orientation == self.orientations) {
+        [navigationBar setHidden:NO];
+    }
 }
 
 - (void)removeDefaultShareButton:(UINavigationBar*)nvBar {
