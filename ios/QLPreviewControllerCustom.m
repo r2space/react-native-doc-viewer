@@ -20,9 +20,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
-    [navigationBar setHidden:NO];
-    [self removeDefaultShareButton:navigationBar];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(showNavBar:)userInfo:nil repeats:NO];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -35,6 +33,12 @@
     [super viewDidLayoutSubviews];
     UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
     [self removeDefaultShareButton:navigationBar];
+}
+
+- (void)showNavBar:(NSTimer *)timer {
+    UINavigationBar *navigationBar = [self getNavigationBarFromView:self.view];
+    [self removeDefaultShareButton:navigationBar];
+    [navigationBar setHidden:NO];
 }
 
 - (void)orientationChanged:(NSNotification*)notification {
