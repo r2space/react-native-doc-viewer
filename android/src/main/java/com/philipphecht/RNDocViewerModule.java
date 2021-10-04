@@ -466,12 +466,21 @@ public class RNDocViewerModule extends ReactContextBaseJavaModule {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-                if (intent.resolveActivity(context.getPackageManager()) != null) {
+                // In android API 30, the intent.resolveActivity(context.getPackageManager()) return null,
+                // but context.startActivity(intent) execute without error. So move
+                // context.startActivity(intent) into try/catch block
+                // GO-16211
+                try {
                     context.startActivity(intent);
                     // Thread-safe.
                     callback.invoke(null, fileName);
-                } else {
-                    activityNotFoundMessage("Activity not found to handle: " + contentUri.toString() + " (" + mimeType + ")");
+                } catch (ActivityNotFoundException e) {
+                    String errorMessage = e.getMessage();
+                    if (errorMessage != null) {
+                        activityNotFoundMessage(errorMessage);
+                    } else {
+                        activityNotFoundMessage("Activity not found to handle: " + contentUri.toString() + " (" + mimeType + ")");
+                    }
                 }
             } catch (ActivityNotFoundException e) {
                 activityNotFoundMessage(e.getMessage());
