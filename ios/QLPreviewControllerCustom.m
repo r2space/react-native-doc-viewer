@@ -66,7 +66,7 @@
     if (nvBar) {
         UINavigationItem *item = nvBar.items.firstObject;
         if (item.rightBarButtonItems.count > 1) {
-            UIBarButtonItem* button = item.rightBarButtonItems[1];
+            UIBarButtonItem* button = item.rightBarButtonItems[item.rightBarButtonItems.count - 1];
             NSArray * buttons = @[button];
             [item setRightBarButtonItems:buttons];
         }
